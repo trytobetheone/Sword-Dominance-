@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박민수 | IT Coordinator & Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+        }
+
+        /* 타이핑 커서 애니메이션 */
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .typing-cursor {
+            animation: blink 1s infinite;
+        }
+
+        /* 페이드인 + 슬라이드업 */
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-up {
+            animation: slideUpFade 0.6s ease-out forwards;
+        }
+
+        /* 초기에는 숨김 */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* 네비바 활성 표시 */
+        nav a.active {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+
+        /* 부드러운 스크롤 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 프로젝트 카드 호버 효과 */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.1);
+        }
+
+        /* 스킬 뱃지 */
+        .skill-badge {
+            display: inline-block;
+            background-color: #1e293b;
+            color: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            margin: 0.25rem;
+            border: 1px solid #334155;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .skill-badge:hover {
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-slate-900 border-b border-slate-800 z-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <a href="#home" class="text-xl font-bold text-sky-400">박민수</a>
+            <div class="flex gap-6">
+                <a href="#about" class="nav-link text-slate-300 hover:text-sky-400 transition">About</a>
+                <a href="#skills" class="nav-link text-slate-300 hover:text-sky-400 transition">Skills</a>
+                <a href="#projects" class="nav-link text-slate-300 hover:text-sky-400 transition">Projects</a>
+                <a href="#contact" class="nav-link text-slate-300 hover:text-sky-400 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-800 flex items-center justify-center overflow-hidden">
+        <!-- SVG Candlestick Chart Background -->
+        <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+            <!-- 격자 배경 -->
+            <defs>
+                <pattern id="grid" width="80" height="60" patternUnits="userSpaceOnUse">
+                    <path d="M 80 0 L 0 0 0 60" fill="none" stroke="#334155" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="1200" height="600" fill="url(#grid)" />
+
+            <!-- 봉차트 1 (상승) - 초록색 -->
+            <line x1="80" y1="150" x2="80" y2="120" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+            <rect x="70" y="200" width="20" height="80" fill="#10b981" opacity="0.8"/>
+            <line x1="80" y1="280" x2="80" y2="320" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+
+            <!-- 봉차트 2 (하락) - 빨강색 -->
+            <line x1="160" y1="100" x2="160" y2="140" stroke="#ef4444" stroke-width="1" opacity="0.8"/>
+            <rect x="150" y="140" width="20" height="90" fill="#ef4444" opacity="0.8"/>
+            <line x1="160" y1="230" x2="160" y2="300" stroke="#ef4444" stroke-width="1" opacity="0.8"/>
+
+            <!-- 봉차트 3 (상승) - 초록색 -->
+            <line x1="240" y1="180" x2="240" y2="110" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+            <rect x="230" y="110" width="20" height="100" fill="#10b981" opacity="0.8"/>
+            <line x1="240" y1="210" x2="240" y2="280" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+
+            <!-- 봉차트 4 (하락) - 빨강색 -->
+            <line x1="320" y1="80" x2="320" y2="150" stroke="#ef4444" stroke-width="1" opacity="0.8"/>
+            <rect x="310" y="150" width="20" height="110" fill="#ef4444" opacity="0.8"/>
+            <line x1="320" y1="260" x2="320" y2="350" stroke="#ef4444" stroke-width="1" opacity="0.8"/>
+
+            <!-- 봉차트 5 (상승) - 초록색 -->
+            <line x1="400" y1="200" x2="400" y2="80" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+            <rect x="390" y="80" width="20" height="120" fill="#10b981" opacity="0.8"/>
+            <line x1="400" y1="200" x2="400" y2="260" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+
+            <!-- 봉차트 6 (상승강) - 초록색 -->
+            <line x1="480" y1="250" x2="480" y2="60" stroke="#059669" stroke-width="1" opacity="0.9"/>
+            <rect x="470" y="60" width="20" height="140" fill="#059669" opacity="0.9"/>
+            <line x1="480" y1="200" x2="480" y2="280" stroke="#059669" stroke-width="1" opacity="0.9"/>
+
+            <!-- 봉차트 7 (하락) - 빨강색 -->
+            <line x1="560" y1="70" x2="560" y2="180" stroke="#dc2626" stroke-width="1" opacity="0.9"/>
+            <rect x="550" y="180" width="20" height="100" fill="#dc2626" opacity="0.9"/>
+            <line x1="560" y1="280" x2="560" y2="360" stroke="#dc2626" stroke-width="1" opacity="0.9"/>
+
+            <!-- 봉차트 8 (상승) - 초록색 -->
+            <line x1="640" y1="220" x2="640" y2="100" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+            <rect x="630" y="100" width="20" height="110" fill="#10b981" opacity="0.8"/>
+            <line x1="640" y1="210" x2="640" y2="290" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+
+            <!-- 봉차트 9 (상승약) - 초록색 -->
+            <line x1="720" y1="180" x2="720" y2="140" stroke="#10b981" stroke-width="1" opacity="0.7"/>
+            <rect x="710" y="140" width="20" height="60" fill="#10b981" opacity="0.7"/>
+            <line x1="720" y1="200" x2="720" y2="270" stroke="#10b981" stroke-width="1" opacity="0.7"/>
+
+            <!-- 봉차트 10 (상승강) - 초록색 -->
+            <line x1="800" y1="240" x2="800" y2="50" stroke="#059669" stroke-width="1" opacity="0.9"/>
+            <rect x="790" y="50" width="20" height="150" fill="#059669" opacity="0.9"/>
+            <line x1="800" y1="200" x2="800" y2="300" stroke="#059669" stroke-width="1" opacity="0.9"/>
+
+            <!-- 봉차트 11 (하락약) - 빨강색 -->
+            <line x1="880" y1="90" x2="880" y2="160" stroke="#ef4444" stroke-width="1" opacity="0.7"/>
+            <rect x="870" y="160" width="20" height="70" fill="#ef4444" opacity="0.7"/>
+            <line x1="880" y1="230" x2="880" y2="310" stroke="#ef4444" stroke-width="1" opacity="0.7"/>
+
+            <!-- 봉차트 12 (상승) - 초록색 -->
+            <line x1="960" y1="170" x2="960" y2="90" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+            <rect x="950" y="90" width="20" height="100" fill="#10b981" opacity="0.8"/>
+            <line x1="960" y1="190" x2="960" y2="270" stroke="#10b981" stroke-width="1" opacity="0.8"/>
+
+            <!-- 우측 상단 추가 패턴 -->
+            <line x1="1050" y1="100" x2="1050" y2="180" stroke="#ef4444" stroke-width="1" opacity="0.6"/>
+            <rect x="1040" y="180" width="20" height="80" fill="#ef4444" opacity="0.6"/>
+            <line x1="1050" y1="260" x2="1050" y2="330" stroke="#ef4444" stroke-width="1" opacity="0.6"/>
+
+            <line x1="1120" y1="150" x2="1120" y2="70" stroke="#10b981" stroke-width="1" opacity="0.7"/>
+            <rect x="1110" y="70" width="20" height="90" fill="#10b981" opacity="0.7"/>
+            <line x1="1120" y1="160" x2="1120" y2="250" stroke="#10b981" stroke-width="1" opacity="0.7"/>
+        </svg>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center scroll-fade relative z-10">
+            <h1 class="text-5xl sm:text-6xl font-bold mb-6">
+                <span class="text-sky-400">안녕하세요,</span><br>
+                <span class="text-white">박민수입니다.</span>
+            </h1>
+
+            <div class="text-2xl sm:text-3xl font-semibold mb-8 h-12 flex items-center justify-center">
+                <span class="text-sky-400">
+                    <span id="typing-text"></span><span class="typing-cursor">|</span>
+                </span>
+            </div>
+
+            <p class="text-slate-300 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                증권회사에서 IT 개발 업무를 조율하는 <span class="text-sky-400 font-semibold">Coordinator</span>로 일하고 있습니다.<br>
+                기술과 비즈니스를 연결하며 더 나은 시스템을 만드는 것에 관심이 많습니다.
+            </p>
+
+            <div class="flex gap-4 justify-center">
+                <a href="mailto:mainparkg@gmail.com" class="px-8 py-3 bg-sky-400 text-slate-900 font-semibold rounded-lg hover:bg-sky-300 transition">
+                    이메일로 연락하기
+                </a>
+                <a href="#projects" class="px-8 py-3 border border-sky-400 text-sky-400 font-semibold rounded-lg hover:bg-sky-400 hover:text-slate-900 transition">
+                    프로젝트 보기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <h2 class="text-4xl font-bold mb-12 text-sky-400 scroll-fade">About</h2>
+
+            <div class="bg-slate-800 rounded-lg p-8 border border-slate-700 scroll-fade">
+                <p class="text-slate-300 text-lg leading-relaxed mb-4">
+                    저는 금융 기관에서 IT 개발 업무를 주도하는 전문가입니다. 증권 거래 시스템부터 내부 운영 도구까지
+                    다양한 프로젝트를 경험하며 <span class="text-sky-400 font-semibold">기술적 실행력</span>과
+                    <span class="text-sky-400 font-semibold">비즈니스 이해도</span>를 갖추고 있습니다.
+                </p>
+
+                <p class="text-slate-300 text-lg leading-relaxed mb-4">
+                    Frontend부터 Backend, DevOps까지 전 스택 개발 경험으로 팀 간 소통을 촉진하며,
+                    복잡한 요구사항을 실현 가능한 기술 솔루션으로 변환하는 것을 즐깁니다.
+                </p>
+
+                <p class="text-slate-300 text-lg leading-relaxed">
+                    새로운 기술 학습과 지속적인 개선을 통해 더 효율적이고 안정적인 시스템을 만드는 데 기여하고 싶습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <h2 class="text-4xl font-bold mb-12 text-sky-400 scroll-fade">Skills</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <!-- Frontend -->
+                <div class="bg-slate-900 rounded-lg p-6 border border-slate-700 scroll-fade">
+                    <h3 class="text-xl font-semibold text-sky-400 mb-4">Frontend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge">HTML5</span>
+                        <span class="skill-badge">CSS3</span>
+                        <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">React</span>
+                        <span class="skill-badge">Vue.js</span>
+                        <span class="skill-badge">Tailwind</span>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="bg-slate-900 rounded-lg p-6 border border-slate-700 scroll-fade">
+                    <h3 class="text-xl font-semibold text-sky-400 mb-4">Backend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge">Node.js</span>
+                        <span class="skill-badge">Express</span>
+                        <span class="skill-badge">Python</span>
+                        <span class="skill-badge">FastAPI</span>
+                        <span class="skill-badge">Java</span>
+                        <span class="skill-badge">Spring Boot</span>
+                    </div>
+                </div>
+
+                <!-- DevOps -->
+                <div class="bg-slate-900 rounded-lg p-6 border border-slate-700 scroll-fade">
+                    <h3 class="text-xl font-semibold text-sky-400 mb-4">DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge">Git</span>
+                        <span class="skill-badge">Docker</span>
+                        <span class="skill-badge">AWS</span>
+                        <span class="skill-badge">CI/CD</span>
+                        <span class="skill-badge">Linux</span>
+                        <span class="skill-badge">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="bg-slate-900 rounded-lg p-6 border border-slate-700 scroll-fade">
+                    <h3 class="text-xl font-semibold text-sky-400 mb-4">Tools & Collab</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge">Jira</span>
+                        <span class="skill-badge">Confluence</span>
+                        <span class="skill-badge">Figma</span>
+                        <span class="skill-badge">VS Code</span>
+                        <span class="skill-badge">Postman</span>
+                        <span class="skill-badge">Slack</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-slate-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <h2 class="text-4xl font-bold mb-12 text-sky-400 scroll-fade">Projects</h2>
+
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-slate-800 rounded-lg p-6 border border-slate-700 scroll-fade">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">증권 트레이딩 대시보드</h3>
+                            <p class="text-slate-400">실시간 주가 조회 및 포트폴리오 현황 시각화</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 mb-4">
+                        WebSocket을 통한 실시간 시세 업데이트, 복합 포트폴리오 분석, 고급 차트 시각화 기능을 갖춘
+                        증권사 전용 트레이딩 플랫폼입니다. 일일 10만+ 거래량을 처리하며 99.9% 가용성을 유지합니다.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge">React</span>
+                        <span class="skill-badge">Node.js</span>
+                        <span class="skill-badge">WebSocket</span>
+                        <span class="skill-badge">MongoDB</span>
+                        <span class="skill-badge">AWS</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card bg-slate-800 rounded-lg p-6 border border-slate-700 scroll-fade">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">IT 업무 자동화 스크립트</h3>
+                            <p class="text-slate-400">반복 보고서 생성 및 이메일 발송 자동화</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 mb-4">
+                        Python 기반 자동화 도구로 일일 운영 보고서, 성과 분석, 리스크 리포트를 자동으로 생성하고
+                        배포합니다. 매년 약 1,000시간 이상의 수동 작업을 절감하며 데이터 정확성을 99.8% 이상
+                        보장합니다.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge">Python</span>
+                        <span class="skill-badge">Pandas</span>
+                        <span class="skill-badge">Celery</span>
+                        <span class="skill-badge">PostgreSQL</span>
+                        <span class="skill-badge">Airflow</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card bg-slate-800 rounded-lg p-6 border border-slate-700 scroll-fade">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">사내 공지 관리 시스템</h3>
+                            <p class="text-slate-400">부서 간 공지 및 공문 관리 웹 앱</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 mb-4">
+                        Vue.js 기반의 직관적인 공지 관리 플랫폼으로 사내 전직원(500+)이 사용합니다.
+                        권한별 공지 배포, 이력 관리, 실시간 알림 기능을 지원하며
+                        매일 평균 300건 이상의 공지를 효율적으로 관리합니다.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge">Vue.js</span>
+                        <span class="skill-badge">REST API</span>
+                        <span class="skill-badge">Express</span>
+                        <span class="skill-badge">MySQL</span>
+                        <span class="skill-badge">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center scroll-fade">
+            <h2 class="text-4xl font-bold mb-8 text-sky-400">Contact</h2>
+
+            <p class="text-slate-300 text-lg mb-8">
+                프로젝트 제안, 협업 기회, 또는 이야기하고 싶은 것이 있으신가요?<br>
+                언제든지 연락 주세요!
+            </p>
+
+            <a href="mailto:mainparkg@gmail.com" class="inline-block px-8 py-4 bg-sky-400 text-slate-900 font-semibold rounded-lg text-lg hover:bg-sky-300 transition">
+                📧 mainparkg@gmail.com
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center text-slate-400 text-sm">
+            <p>&copy; 2026 박민수. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 타이핑 효과
+        const roles = ["IT Coordinator", "증권 시스템 기획자", "Problem Solver", "Tech Bridger"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingText = document.getElementById("typing-text");
+        const typingSpeed = 80;
+        const deletingSpeed = 50;
+        const pauseDuration = 1500;
+
+        function typeWriter() {
+            const currentRole = roles[roleIndex];
+
+            if (!isDeleting) {
+                // 타이핑 중
+                if (charIndex < currentRole.length) {
+                    typingText.textContent += currentRole.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, typingSpeed);
+                } else {
+                    // 타이핑 완료, 일시 정지 후 삭제 시작
+                    isDeleting = true;
+                    setTimeout(typeWriter, pauseDuration);
+                }
+            } else {
+                // 삭제 중
+                if (charIndex > 0) {
+                    typingText.textContent = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                    setTimeout(typeWriter, deletingSpeed);
+                } else {
+                    // 삭제 완료, 다음 역할로 이동
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    setTimeout(typeWriter, 500);
+                }
+            }
+        }
+
+        typeWriter();
+
+        // 네비게이션 활성화 표시
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll("section");
+
+        function updateActiveLink() {
+            let current = "";
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === `#${current}`) {
+                    link.classList.add("active");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", updateActiveLink);
+
+        // Intersection Observer - 페이드인 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate-slide-up");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll(".scroll-fade").forEach(element => {
+            observer.observe(element);
+        });
+
+        // Hero 섹션 초기 애니메이션
+        window.addEventListener("load", () => {
+            const heroElement = document.querySelector("#home .scroll-fade");
+            if (heroElement) {
+                heroElement.classList.add("animate-slide-up");
+            }
+        });
+    </script>
+</body>
+</html>
