@@ -15,6 +15,10 @@ func _ready() -> void:
 		enemies_node.name = "Enemies"
 		add_child(enemies_node)
 
+	# 첫 적 바로 스폰
+	spawn_enemy()
+	enemies_spawned += 1
+
 func _process(delta: float) -> void:
 	spawn_timer += delta
 
@@ -27,4 +31,3 @@ func spawn_enemy() -> void:
 	var random_y = randf_range(250, 350)
 	enemy.position = Vector2(800, random_y)
 	enemies_node.add_child(enemy)
-	enemies_spawned += 1

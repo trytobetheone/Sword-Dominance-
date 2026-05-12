@@ -7,6 +7,9 @@ var attack_cooldown: float = 0.5
 var attack_timer: float = 0.0
 var facing_right: bool = true
 var game_manager: Node = null
+var attack_flash_timer: float = 0.0
+var attack_flash_duration: float = 0.15
+var original_color: Color = Color.WHITE
 
 func _ready() -> void:
 	add_to_group("player")
@@ -14,12 +17,15 @@ func _ready() -> void:
 		var shape = RectangleShape2D.new()
 		shape.size = Vector2(30, 50)
 		$CollisionShape2D.shape = shape
+	if has_node("Sprite2D"):
+		original_color = $Sprite2D.modulate
 	game_manager = get_tree().get_first_node_in_group("game_manager")
 
 func _process(delta: float) -> void:
 	handle_input()
 	handle_movement(delta)
 	attack_timer -= delta
+	update_attack_flash(delta)
 
 func handle_input() -> void:
 	if Input.is_action_just_pressed("attack"):
@@ -39,6 +45,11 @@ func handle_movement(delta: float) -> void:
 func perform_attack() -> void:
 	if attack_timer <= 0:
 		attack_timer = attack_cooldown
+		attack_flash_timer = attack_flash_duration
+
+		# 공격 이펙트: 플레이어 색상 변경
+		if has_node("Sprite2D"):
+			$Sprite2D.modulate = Color.WHITE
 
 		# 공격 범위 내 적 찾기
 		var space_state = get_world_2d().direct_space_state
@@ -56,6 +67,12 @@ func perform_attack() -> void:
 				collider.take_damage(20)
 				if game_manager:
 					game_manager.add_score(10)
+
+func update_attack_flash(delta: float) -> void:
+	if attack_flash_timer > 0:
+		attack_flash_timer -= delta
+		if attack_flash_timer <= 0 and has_node("Sprite2D"):
+			$Sprite2D.modulate = original_color
 
 func take_damage(damage: int) -> void:
 	health -= damage
