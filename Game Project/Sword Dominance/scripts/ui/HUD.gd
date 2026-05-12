@@ -19,14 +19,18 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if player and is_instance_valid(player):
-		$VBoxContainer/HealthLabel.text = "생명력: %d/%d" % [player.health, player.max_health]
+		if has_node("VBoxContainer/HealthLabel"):
+			$VBoxContainer/HealthLabel.text = "생명력: %d/%d" % [player.health, player.max_health]
 
 func _on_score_changed(score: int) -> void:
-	$VBoxContainer/ScoreLabel.text = "점수: %d" % score
+	if has_node("VBoxContainer/ScoreLabel"):
+		$VBoxContainer/ScoreLabel.text = "점수: %d" % score
 
 func _on_time_changed(time: float) -> void:
-	var remaining = 60.0 - time
-	$VBoxContainer/TimeLabel.text = "남은 시간: %.1f초" % max(0, remaining)
+	if has_node("VBoxContainer/TimeLabel"):
+		var remaining = 60.0 - time
+		$VBoxContainer/TimeLabel.text = "남은 시간: %.1f초" % max(0, remaining)
 
 func _on_game_over() -> void:
-	$VBoxContainer/GameOverLabel.show()
+	if has_node("VBoxContainer/GameOverLabel"):
+		$VBoxContainer/GameOverLabel.show()
