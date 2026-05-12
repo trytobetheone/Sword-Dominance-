@@ -3,7 +3,7 @@ extends CharacterBody2D
 var speed: float = 250.0
 var health: int = 100
 var max_health: int = 100
-var attack_cooldown: float = 0.5
+var attack_cooldown: float = 0.3
 var attack_timer: float = 0.0
 var facing_right: bool = true
 var game_manager: Node = null
@@ -74,6 +74,9 @@ func perform_attack() -> void:
 		if has_node("Sprite2D"):
 			$Sprite2D.modulate = Color.WHITE
 
+		# 슬래시 이펙트 생성
+		create_slash_effect()
+
 		# 공격 범위 내 적 찾기 (y=-20: 플레이어 발 위치 기준)
 		var space_state = get_world_2d().direct_space_state
 		var query = PhysicsShapeQueryParameters2D.new()
@@ -90,6 +93,23 @@ func perform_attack() -> void:
 				collider.take_damage(20)
 				if game_manager:
 					game_manager.add_score(10)
+
+func create_slash_effect() -> void:
+	# SlashEffect 동적 로드 (또는 씬 인스턴스)
+	var slash_scene = preload("res://scenes/weapons/SlashEffect.tscn")
+	if slash_scene:
+		var slash = slash_scene.instantiate()
+	else:
+		# 씬이 없으면 직접 노드 생성
+		var slash = Node2D.new()
+		slash.set_script(load("res://scripts/combat/SlashEffect.gd"))
+
+	# 슬래시 위치: 플레이어 바로 위쪽
+	slash.position = position + Vector2(0, -30)
+	if not facing_right:
+		slash.scale.x = -1  # 왼쪽 향할 때 반전
+
+	get_parent().add_child(slash)
 
 func update_attack_flash(delta: float) -> void:
 	if attack_flash_timer > 0:
