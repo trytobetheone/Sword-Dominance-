@@ -13,8 +13,9 @@ signal time_changed
 signal game_over_signal
 
 func _ready() -> void:
-	player = get_tree().first_child_in_group("player")
-	hud = get_tree().first_child_in_group("hud")
+	add_to_group("game_manager")
+	player = get_tree().get_first_node_in_group("player")
+	hud = get_tree().get_first_node_in_group("hud")
 
 func _process(delta: float) -> void:
 	if not game_over:

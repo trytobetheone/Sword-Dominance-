@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 func update_player_reference() -> void:
 	if player == null:
-		player = get_tree().first_child_in_group("player")
+		player = get_tree().get_first_node_in_group("player")
 
 func chase_player() -> void:
 	if player == null or not is_instance_valid(player):

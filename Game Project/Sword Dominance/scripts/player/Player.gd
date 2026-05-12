@@ -14,6 +14,7 @@ func _ready() -> void:
 		var shape = RectangleShape2D.new()
 		shape.size = Vector2(30, 50)
 		$CollisionShape2D.shape = shape
+	game_manager = get_tree().get_first_node_in_group("game_manager")
 
 func _process(delta: float) -> void:
 	handle_input()

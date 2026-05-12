@@ -6,8 +6,8 @@ var game_manager: Node = null
 func _ready() -> void:
 	add_to_group("hud")
 	await get_tree().process_frame
-	player = get_tree().first_child_in_group("player")
-	game_manager = get_tree().root.get_child(0).get_node("GameManager")
+	player = get_tree().get_first_node_in_group("player")
+	game_manager = get_tree().get_first_node_in_group("game_manager")
 
 	if game_manager:
 		if not game_manager.score_changed.is_connected(_on_score_changed):
