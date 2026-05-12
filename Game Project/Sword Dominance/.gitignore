@@ -1,0 +1,81 @@
+# 운영체제
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.sublime-workspace
+
+# 빌드 산출물
+build/
+dist/
+*.o
+*.a
+*.so
+*.out
+
+# 의존성
+node_modules/
+.npm
+package-lock.json
+yarn.lock
+venv/
+.venv
+__pycache__/
+*.pyc
+
+# 엔진별 무시 파일
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+Assets/AssetStoreTools*
+*.VisualStudio.csproj
+*.csproj
+*.sln
+
+# Godot
+.godot/
+*.import
+
+# Unreal
+Binaries/
+Intermediate/
+Saved/
+.vscode
+*.VC.db
+
+# 로그
+*.log
+logs/
+
+# 환경 설정
+.env
+.env.local
+config.local.json
+
+# 임시 파일
+*.tmp
+*.temp
+*.bak
+~*
+
+# 음악/음성 파일 (크기가 크므로 필요시 LFS 사용)
+# *.mp3
+# *.wav
+# *.ogg
+# *.flac
+
+# 운영 관련
+.DS_Store
+.AppleDouble
+.LSOverride
