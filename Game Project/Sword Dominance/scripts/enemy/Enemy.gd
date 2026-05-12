@@ -12,7 +12,7 @@ var attack_timer: float = 0.0
 func _ready() -> void:
 	add_to_group("enemy")
 	if has_node("CollisionShape2D"):
-		var shape = BoxShape2D.new()
+		var shape = RectangleShape2D.new()
 		shape.size = Vector2(25, 40)
 		$CollisionShape2D.shape = shape
 

@@ -11,7 +11,7 @@ var game_manager: Node = null
 func _ready() -> void:
 	add_to_group("player")
 	if has_node("CollisionShape2D"):
-		var shape = BoxShape2D.new()
+		var shape = RectangleShape2D.new()
 		shape.size = Vector2(30, 50)
 		$CollisionShape2D.shape = shape
 
