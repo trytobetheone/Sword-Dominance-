@@ -5,17 +5,24 @@ var game_manager: Node = null
 
 func _ready() -> void:
 	add_to_group("hud")
+	print("HUD 준비됨!")
 	await get_tree().process_frame
 	player = get_tree().get_first_node_in_group("player")
 	game_manager = get_tree().get_first_node_in_group("game_manager")
 
+	print("HUD 플레이어: ", player)
+	print("HUD 게임매니저: ", game_manager)
+
 	if game_manager:
-		if not game_manager.score_changed.is_connected(_on_score_changed):
-			game_manager.score_changed.connect(_on_score_changed)
-		if not game_manager.time_changed.is_connected(_on_time_changed):
-			game_manager.time_changed.connect(_on_time_changed)
-		if not game_manager.game_over_signal.is_connected(_on_game_over):
-			game_manager.game_over_signal.connect(_on_game_over)
+		try:
+			if not game_manager.score_changed.is_connected(_on_score_changed):
+				game_manager.score_changed.connect(_on_score_changed)
+			if not game_manager.time_changed.is_connected(_on_time_changed):
+				game_manager.time_changed.connect(_on_time_changed)
+			if not game_manager.game_over_signal.is_connected(_on_game_over):
+				game_manager.game_over_signal.connect(_on_game_over)
+		except:
+			print("신호 연결 실패")
 
 func _process(delta: float) -> void:
 	if player and is_instance_valid(player):

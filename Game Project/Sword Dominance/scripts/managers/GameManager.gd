@@ -34,5 +34,6 @@ func add_score(points: int) -> void:
 
 func end_game() -> void:
 	game_over = true
+	print("게임 오버!")
 	emit_signal("game_over_signal")
-	get_tree().paused = true
+	# get_tree().paused = true  # 일단 비활성화

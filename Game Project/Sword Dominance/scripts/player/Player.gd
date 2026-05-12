@@ -14,26 +14,45 @@ var original_color: Color = Color.WHITE
 func _ready() -> void:
 	add_to_group("player")
 	print("플레이어 준비됨!")
+
+	# 콜리전 셰이프 설정
 	if has_node("CollisionShape2D"):
-		var shape = RectangleShape2D.new()
-		shape.size = Vector2(30, 50)
-		$CollisionShape2D.shape = shape
-		print("콜리전 셰이프 설정됨")
+		if $CollisionShape2D.shape == null:
+			var shape = RectangleShape2D.new()
+			shape.size = Vector2(30, 50)
+			$CollisionShape2D.shape = shape
+			print("콜리전 셰이프 생성됨")
+		else:
+			print("콜리전 셰이프 이미 있음")
+
+	# 스프라이트 색상 저장
 	if has_node("Sprite2D"):
 		original_color = $Sprite2D.modulate
+		print("스프라이트 색상 저장: ", original_color)
+
 	game_manager = get_tree().get_first_node_in_group("game_manager")
 	print("게임 매니저 찾음: ", game_manager)
+	print("플레이어 포지션: ", position)
+	print("노드 활성화 여부: ", is_node_enabled())
 
 func _process(delta: float) -> void:
-	handle_input()
 	handle_movement(delta)
 	attack_timer -= delta
 	update_attack_flash(delta)
 
-func handle_input() -> void:
-	if Input.is_action_just_pressed("attack"):
-		print("공격 입력 감지!")
-		perform_attack()
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed:
+			if event.keycode == KEY_Q:
+				print("Q 키 눌림!")
+				perform_attack()
+				get_tree().root.set_input_as_handled()
+			elif event.keycode == KEY_LEFT:
+				print("LEFT 키 눌림!")
+				get_tree().root.set_input_as_handled()
+			elif event.keycode == KEY_RIGHT:
+				print("RIGHT 키 눌림!")
+				get_tree().root.set_input_as_handled()
 
 func handle_movement(delta: float) -> void:
 	var input_dir = Input.get_axis("ui_left", "ui_right")
