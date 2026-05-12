@@ -5,7 +5,22 @@
       "Bash(git remote *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(mkdir -p \"scenes/player\")",
+      "Bash(mkdir -p \"scenes/enemy\")",
+      "Bash(mkdir -p \"scenes/weapons\")",
+      "Bash(mkdir -p \"scenes/stages\")",
+      "Bash(mkdir -p \"scenes/ui\")",
+      "Bash(mkdir -p \"scenes/managers\")",
+      "Bash(mkdir -p \"scripts/player\")",
+      "Bash(mkdir -p \"scripts/enemy\")",
+      "Bash(mkdir -p \"scripts/combat\")",
+      "Bash(mkdir -p \"scripts/stage\")",
+      "Bash(touch \"scenes/managers/.gitkeep\")",
+      "Bash(touch \"scripts/combat/.gitkeep\")",
+      "Bash(touch \"resources/weapons/.gitkeep\")",
+      "Bash(touch \"resources/enemies/.gitkeep\")",
+      "Bash(touch \"resources/stages/.gitkeep\")"
     ]
   }
 }

@@ -1,0 +1,7 @@
+[gd_scene load_steps=1 format=3 uid="uid://slash_hitbox"]
+
+[node name="SlashHitbox" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

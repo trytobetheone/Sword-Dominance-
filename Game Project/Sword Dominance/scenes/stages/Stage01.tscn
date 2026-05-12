@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://stage01"]
+
+[ext_resource type="Script" path="res://scripts/stage/StageManager.gd" id="1"]
+
+[node name="Stage01" type="Node2D"]
+script = ExtResource("1")
+
+[node name="TileMap" type="TileMap" parent="."]
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
