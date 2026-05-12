@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://stage01"]
 
 [ext_resource type="Script" path="res://scripts/stage/StageManager.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/player/Player.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
 
 [node name="Stage01" type="Node2D"]
 script = ExtResource("1")
@@ -17,18 +17,8 @@ offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.5, 0.3, 0.1, 1)
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("2")]
 position = Vector2(100, 300)
-script = ExtResource("2")
-
-[node name="Sprite2D" type="ColorRect" parent="Player"]
-offset_left = -15.0
-offset_top = -25.0
-offset_right = 15.0
-offset_bottom = 25.0
-color = Color(1, 0.84, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 
 [node name="Enemies" type="Node2D" parent="."]
 

@@ -13,13 +13,16 @@ var original_color: Color = Color.WHITE
 
 func _ready() -> void:
 	add_to_group("player")
+	print("플레이어 준비됨!")
 	if has_node("CollisionShape2D"):
 		var shape = RectangleShape2D.new()
 		shape.size = Vector2(30, 50)
 		$CollisionShape2D.shape = shape
+		print("콜리전 셰이프 설정됨")
 	if has_node("Sprite2D"):
 		original_color = $Sprite2D.modulate
 	game_manager = get_tree().get_first_node_in_group("game_manager")
+	print("게임 매니저 찾음: ", game_manager)
 
 func _process(delta: float) -> void:
 	handle_input()
@@ -29,12 +32,14 @@ func _process(delta: float) -> void:
 
 func handle_input() -> void:
 	if Input.is_action_just_pressed("attack"):
+		print("공격 입력 감지!")
 		perform_attack()
 
 func handle_movement(delta: float) -> void:
 	var input_dir = Input.get_axis("ui_left", "ui_right")
 
 	if input_dir != 0:
+		print("이동 입력: ", input_dir)
 		velocity.x = input_dir * speed
 		facing_right = input_dir > 0
 	else:
