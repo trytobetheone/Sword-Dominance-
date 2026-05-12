@@ -41,10 +41,12 @@ func perform_attack() -> void:
 
 		# 공격 범위 내 적 찾기
 		var space_state = get_world_2d().direct_space_state
-		var query = PhysicsRectQueryParameters2D.create(
-			Rect2(position + Vector2(40 if facing_right else -40, -15), Vector2(50, 30))
-		)
-		query.collide_with_areas = false
+		var query = PhysicsShapeQueryParameters2D.new()
+		var shape = RectangleShape2D.new()
+		shape.size = Vector2(50, 30)
+		query.shape = shape
+		query.transform = Transform2D.IDENTITY.translated(position + Vector2(40 if facing_right else -40, -15))
+
 		var result = space_state.intersect_shape(query)
 
 		for collision in result:
