@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://title"]
+
+[ext_resource type="Script" path="res://scripts/ui/TitleScreen.gd" id="1"]
+
+[node name="Title" type="Node"]
+script = ExtResource("1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+anchors_fill_parent = true
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="Title" type="Label" parent="CanvasLayer"]
+anchors_fill_parent = true
+theme_override_font_sizes/font_size = 80
+text = "Sword Dominance"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubText" type="Label" parent="CanvasLayer"]
+anchors_fill_parent = true
+offset_top = 200.0
+theme_override_font_sizes/font_size = 20
+text = "아무 영문 키나 누르세요 / Press any letter key"
+horizontal_alignment = 1
+vertical_alignment = 0
+modulate = Color(0.7, 0.7, 0.7, 0.7)

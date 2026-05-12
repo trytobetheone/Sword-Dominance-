@@ -13,7 +13,7 @@ config_version=5
 config/name="칼의 지배 (Sword Dominance)"
 config/description="메탈슬러그 스타일의 고려시대 횡스크롤 액션 게임"
 config/version="0.1.0"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/Title.tscn"
 config/features=PackedStringArray("4.2")
 
 [display]
