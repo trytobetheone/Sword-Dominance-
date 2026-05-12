@@ -33,7 +33,6 @@ func _ready() -> void:
 	game_manager = get_tree().get_first_node_in_group("game_manager")
 	print("게임 매니저 찾음: ", game_manager)
 	print("플레이어 포지션: ", position)
-	print("노드 활성화 여부: ", is_node_enabled())
 
 func _process(delta: float) -> void:
 	handle_movement(delta)

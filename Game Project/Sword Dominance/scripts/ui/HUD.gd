@@ -14,15 +14,12 @@ func _ready() -> void:
 	print("HUD 게임매니저: ", game_manager)
 
 	if game_manager:
-		try:
-			if not game_manager.score_changed.is_connected(_on_score_changed):
-				game_manager.score_changed.connect(_on_score_changed)
-			if not game_manager.time_changed.is_connected(_on_time_changed):
-				game_manager.time_changed.connect(_on_time_changed)
-			if not game_manager.game_over_signal.is_connected(_on_game_over):
-				game_manager.game_over_signal.connect(_on_game_over)
-		except:
-			print("신호 연결 실패")
+		if game_manager.has_signal("score_changed"):
+			game_manager.score_changed.connect(_on_score_changed)
+		if game_manager.has_signal("time_changed"):
+			game_manager.time_changed.connect(_on_time_changed)
+		if game_manager.has_signal("game_over_signal"):
+			game_manager.game_over_signal.connect(_on_game_over)
 
 func _process(delta: float) -> void:
 	if player and is_instance_valid(player):
