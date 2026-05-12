@@ -1,58 +1,58 @@
 extends CharacterBody2D
 
-# 플레이어 통계
-var speed: float = 200.0
-var jump_force: float = -400.0
+var speed: float = 250.0
 var health: int = 100
 var max_health: int = 100
+var attack_cooldown: float = 0.5
+var attack_timer: float = 0.0
+var facing_right: bool = true
+var game_manager: Node = null
 
 func _ready() -> void:
-	pass
+	add_to_group("player")
+	if has_node("CollisionShape2D"):
+		var shape = BoxShape2D.new()
+		shape.size = Vector2(30, 50)
+		$CollisionShape2D.shape = shape
 
 func _process(delta: float) -> void:
 	handle_input()
 	handle_movement(delta)
+	attack_timer -= delta
 
 func handle_input() -> void:
-	var input_dir = Input.get_axis("ui_left", "ui_right")
-
 	if Input.is_action_just_pressed("attack"):
 		perform_attack()
-
-	if Input.is_action_just_pressed("special_attack"):
-		perform_special_attack()
-
-	if Input.is_action_just_pressed("interact"):
-		interact()
-
-	if Input.is_action_just_pressed("ultimate"):
-		perform_ultimate()
 
 func handle_movement(delta: float) -> void:
 	var input_dir = Input.get_axis("ui_left", "ui_right")
 
 	if input_dir != 0:
 		velocity.x = input_dir * speed
+		facing_right = input_dir > 0
 	else:
 		velocity.x = 0
 
 	move_and_slide()
 
 func perform_attack() -> void:
-	# Q - 기본 공격
-	print("기본 공격!")
+	if attack_timer <= 0:
+		attack_timer = attack_cooldown
 
-func perform_special_attack() -> void:
-	# W - 특수 공격
-	print("특수 공격!")
+		# 공격 범위 내 적 찾기
+		var space_state = get_world_2d().direct_space_state
+		var query = PhysicsRectQueryParameters2D.create(
+			Rect2(position + Vector2(40 if facing_right else -40, -15), Vector2(50, 30))
+		)
+		query.collide_with_areas = false
+		var result = space_state.intersect_shape(query)
 
-func interact() -> void:
-	# E - 상호작용
-	print("상호작용!")
-
-func perform_ultimate() -> void:
-	# R - 궁극기
-	print("궁극기!")
+		for collision in result:
+			var collider = collision.collider
+			if collider.is_in_group("enemy"):
+				collider.take_damage(20)
+				if game_manager:
+					game_manager.add_score(10)
 
 func take_damage(damage: int) -> void:
 	health -= damage
@@ -60,5 +60,4 @@ func take_damage(damage: int) -> void:
 		die()
 
 func die() -> void:
-	print("플레이어 사망!")
 	queue_free()
