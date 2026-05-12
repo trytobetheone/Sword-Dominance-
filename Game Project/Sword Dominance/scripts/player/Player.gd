@@ -11,6 +11,13 @@ var attack_flash_timer: float = 0.0
 var attack_flash_duration: float = 0.15
 var original_color: Color = Color.WHITE
 
+# 패링 시스템
+var parrying: bool = false
+var parry_duration: float = 0.2
+var parry_timer: float = 0.0
+var parry_cooldown: float = 0.5
+var parry_cooldown_timer: float = 0.0
+
 func _ready() -> void:
 	add_to_group("player")
 	print("플레이어 준비됨!")
@@ -38,6 +45,7 @@ func _process(delta: float) -> void:
 	handle_movement(delta)
 	attack_timer -= delta
 	update_attack_flash(delta)
+	update_parry(delta)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -45,6 +53,10 @@ func _input(event: InputEvent) -> void:
 			if event.keycode == KEY_Q:
 				print("Q 키 눌림!")
 				perform_attack()
+				get_tree().root.set_input_as_handled()
+			elif event.keycode == KEY_W:
+				print("W 키 눌림 - 패링!")
+				perform_parry()
 				get_tree().root.set_input_as_handled()
 			elif event.keycode == KEY_LEFT:
 				print("LEFT 키 눌림!")
@@ -106,6 +118,27 @@ func update_attack_flash(delta: float) -> void:
 		attack_flash_timer -= delta
 		if attack_flash_timer <= 0 and has_node("Sprite2D"):
 			$Sprite2D.modulate = original_color
+
+func perform_parry() -> void:
+	if parry_cooldown_timer <= 0:
+		parrying = true
+		parry_timer = parry_duration
+		parry_cooldown_timer = parry_cooldown
+
+		# 패링 이펙트: 플레이어 색상 파란색으로 변경
+		if has_node("Sprite2D"):
+			$Sprite2D.modulate = Color.CYAN
+
+func update_parry(delta: float) -> void:
+	if parry_timer > 0:
+		parry_timer -= delta
+		if parry_timer <= 0:
+			parrying = false
+			if has_node("Sprite2D"):
+				$Sprite2D.modulate = original_color
+
+	if parry_cooldown_timer > 0:
+		parry_cooldown_timer -= delta
 
 func take_damage(damage: int) -> void:
 	health -= damage

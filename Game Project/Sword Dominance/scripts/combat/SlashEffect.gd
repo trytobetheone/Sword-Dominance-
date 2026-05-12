@@ -18,8 +18,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	elapsed += delta
 
-	# 회전 애니메이션 (위에서 중단으로)
-	rotation = -(PI / 2) * (elapsed / duration)
+	# 회전 애니메이션 (위에서 아래로)
+	rotation = -PI * (elapsed / duration)
 
 	# 페이드아웃
 	modulate.a = 1.0 - (elapsed / duration)
