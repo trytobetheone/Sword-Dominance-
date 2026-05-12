@@ -1,6 +1,8 @@
 extends Node2D
 
 # 스테이지 관리자
+const GROUND_Y = 375  # 모든 캐릭터의 발 위치 기준 (지면 위)
+
 var enemy_scene = preload("res://scenes/enemy/KhitanSoldier.tscn")
 var spawn_timer: float = 0.0
 var spawn_interval: float = 2.0
@@ -28,6 +30,6 @@ func _process(delta: float) -> void:
 
 func spawn_enemy() -> void:
 	var enemy = enemy_scene.instantiate()
-	var random_y = randf_range(250, 350)
-	enemy.position = Vector2(800, random_y)
+	# 모든 적은 플레이어와 같은 y=375에서 스폰 (발이 지면에 닿는 위치)
+	enemy.position = Vector2(800, GROUND_Y)
 	enemies_node.add_child(enemy)

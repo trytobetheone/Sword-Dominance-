@@ -74,13 +74,13 @@ func perform_attack() -> void:
 		if has_node("Sprite2D"):
 			$Sprite2D.modulate = Color.WHITE
 
-		# 공격 범위 내 적 찾기
+		# 공격 범위 내 적 찾기 (y=-20: 플레이어 발 위치 기준)
 		var space_state = get_world_2d().direct_space_state
 		var query = PhysicsShapeQueryParameters2D.new()
 		var shape = RectangleShape2D.new()
 		shape.size = Vector2(50, 30)
 		query.shape = shape
-		query.transform = Transform2D.IDENTITY.translated(position + Vector2(40 if facing_right else -40, -15))
+		query.transform = Transform2D.IDENTITY.translated(position + Vector2(40 if facing_right else -40, -20))
 
 		var result = space_state.intersect_shape(query)
 
