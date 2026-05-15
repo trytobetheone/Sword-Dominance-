@@ -29,13 +29,11 @@ func _ready() -> void:
 			shape.size = Vector2(30, 50)
 			$CollisionShape2D.shape = shape
 			print("콜리전 셰이프 생성됨")
-		else:
-			print("콜리전 셰이프 이미 있음")
 
-	# 스프라이트 색상 저장
-	if has_node("Sprite2D"):
-		original_color = $Sprite2D.modulate
-		print("스프라이트 색상 저장: ", original_color)
+	# 바디 색상 저장
+	if has_node("Body"):
+		original_color = $Body.modulate
+		print("바디 색상 저장: ", original_color)
 
 	game_manager = get_tree().get_first_node_in_group("game_manager")
 	print("게임 매니저 찾음: ", game_manager)
@@ -83,28 +81,11 @@ func perform_attack() -> void:
 		attack_flash_timer = attack_flash_duration
 
 		# 공격 이펙트: 플레이어 색상 변경
-		if has_node("Sprite2D"):
-			$Sprite2D.modulate = Color.WHITE
+		if has_node("Body"):
+			$Body.modulate = Color.WHITE
 
-		# 슬래시 이펙트 생성
+		# 슬래시 이펙트 생성 (히트박스 충돌로 자동 처리)
 		create_slash_effect()
-
-		# 공격 범위 내 적 찾기 (y=-20: 플레이어 발 위치 기준)
-		var space_state = get_world_2d().direct_space_state
-		var query = PhysicsShapeQueryParameters2D.new()
-		var shape = RectangleShape2D.new()
-		shape.size = Vector2(50, 30)
-		query.shape = shape
-		query.transform = Transform2D.IDENTITY.translated(position + Vector2(40 if facing_right else -40, -20))
-
-		var result = space_state.intersect_shape(query)
-
-		for collision in result:
-			var collider = collision.collider
-			if collider.is_in_group("enemy"):
-				collider.take_damage(20)
-				if game_manager:
-					game_manager.add_score(10)
 
 func create_slash_effect() -> void:
 	var slash = preload("res://scenes/weapons/SlashEffect.tscn").instantiate()
@@ -116,8 +97,8 @@ func create_slash_effect() -> void:
 func update_attack_flash(delta: float) -> void:
 	if attack_flash_timer > 0:
 		attack_flash_timer -= delta
-		if attack_flash_timer <= 0 and has_node("Sprite2D"):
-			$Sprite2D.modulate = original_color
+		if attack_flash_timer <= 0 and has_node("Body"):
+			$Body.modulate = original_color
 
 func perform_parry() -> void:
 	if parry_cooldown_timer <= 0:
@@ -126,16 +107,16 @@ func perform_parry() -> void:
 		parry_cooldown_timer = parry_cooldown
 
 		# 패링 이펙트: 플레이어 색상 파란색으로 변경
-		if has_node("Sprite2D"):
-			$Sprite2D.modulate = Color.CYAN
+		if has_node("Body"):
+			$Body.modulate = Color.CYAN
 
 func update_parry(delta: float) -> void:
 	if parry_timer > 0:
 		parry_timer -= delta
 		if parry_timer <= 0:
 			parrying = false
-			if has_node("Sprite2D"):
-				$Sprite2D.modulate = original_color
+			if has_node("Body"):
+				$Body.modulate = original_color
 
 	if parry_cooldown_timer > 0:
 		parry_cooldown_timer -= delta

@@ -20,6 +20,12 @@ func _ready() -> void:
 		shape.size = Vector2(25, 40)
 		$CollisionShape2D.shape = shape
 
+	# HitBox 초기화
+	if has_node("HitBox/HitBoxShape"):
+		var hitbox_shape = RectangleShape2D.new()
+		hitbox_shape.size = Vector2(30, 45)
+		$HitBox/HitBoxShape.shape = hitbox_shape
+
 func _process(delta: float) -> void:
 	# 스턴 상태 업데이트
 	if stunned:
@@ -59,9 +65,9 @@ func attack_player() -> void:
 			take_parry()
 			return
 
-		player.take_damage(damage)
+		# 슬래시 이펙트만 생성 (히트박스 충돌로 자동 처리)
+		create_slash_effect()
 		attack_timer = attack_cooldown
-		create_slash_effect()  # 적도 슬래시 이펙트 생성
 
 func take_parry() -> void:
 	stunned = true
