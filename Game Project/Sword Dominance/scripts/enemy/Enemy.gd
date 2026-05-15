@@ -76,7 +76,8 @@ func take_parry() -> void:
 
 func create_slash_effect() -> void:
 	var slash = preload("res://scenes/weapons/SlashEffect.tscn").instantiate()
-	slash.position = position + Vector2(0, -30)
+	# 슬래시가 적 위쪽에서 시작해서 아래로 내려옴
+	slash.position = position + Vector2(0, -60)
 	if velocity.x < 0:  # 왼쪽으로 이동 중이면 반전
 		slash.scale.x = -1
 	get_parent().add_child(slash)

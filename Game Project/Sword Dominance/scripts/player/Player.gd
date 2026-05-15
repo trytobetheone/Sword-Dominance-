@@ -89,7 +89,8 @@ func perform_attack() -> void:
 
 func create_slash_effect() -> void:
 	var slash = preload("res://scenes/weapons/SlashEffect.tscn").instantiate()
-	slash.position = position + Vector2(0, -30)
+	# 슬래시가 플레이어 위쪽에서 시작해서 아래로 내려옴
+	slash.position = position + Vector2(0, -60)
 	if not facing_right:
 		slash.scale.x = -1  # 왼쪽 향할 때 반전
 	get_parent().add_child(slash)
